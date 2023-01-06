@@ -2,11 +2,11 @@
     margin: auto;
     width: 70%;
     height: 80px;
-    background: indigo;
+    background: #25033D;
     margin-top: 20px;
-    border-radius: 50px 50px 0 0;
+    border-radius: 5px;
     padding: 10px;
-    padding-top: 20px;
+
 }
 .shop-header-panel-body {
     /*background: gray;*/
@@ -18,10 +18,11 @@
 
 .cards-area {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     margin: auto;
-    width: 100%;
-    height: 1000px;
-    background: rgba(0,0,0,0.1);
+    margin-top: 10px;
+    width: 80%;
 }
 .search-end-filter {
     display: flex;
@@ -70,15 +71,21 @@
 }
 .balance-butt {
     margin-left: 5px;
-    min-width: 100px;
+    min-width: 102px;
     font-size: 16px;
-    width: 13%;
-    height: 80%;
+    font-weight: 500;
+    width: 16%;
+    height: 35px;
+    border: none;
 }
 .mod-butt {
     margin-left: 10px;
     height: 40px;
-    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    font-stretch: expanded;
+    border-radius: 10px !important;
+    border: none;
 }
 .normal-screen-balance-block {
     display: flex;
@@ -93,7 +100,7 @@
 .balance-low-screen {
     display: flex;
     align-items: center;
-    background: indigo;
+    background: #25033D;
     padding: 10px;
     border-radius: 20px;
 }
@@ -102,9 +109,62 @@
         height: 50px !important;
     }
 }
-
 @media (max-width: 1000px) {
-    .shop-header-panel {
-        width: 100%;
+
+}
+@media (max-width: 680px) {
+    .mod-butt {
+        font-size: 11px;
     }
+    .shop-header-panel {
+        width: 80%;
+    }
+}
+@media (max-width: 600px) {
+    .card {
+
+    }
+    .card-img-top {
+
+    }
+    .card-title {
+
+    }
+    .card-text {
+
+    }
+    .card-btn {
+
+    }
+}
+.card {
+    width: 270px;
+    height: 320px !important;
+    background: #25033D !important;
+    border: 2px solid rgba(0,0,0,0.2) !important;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 20px !important;
+}
+.card-img-top {
+    width: 90px !important;
+    margin: auto;
+    margin-top: 20px;
+}
+.card-title {
+    height: 50px;
+}
+.card-text {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: flex-end;
+    margin-top: 10px !important;
+    font-size: 15px;
+    height: 50px;
+    color: gray;
+}
+.card-btn {
+    font-size: 16px !important;
+    margin-top: 20px;
 }
