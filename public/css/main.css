@@ -1,0 +1,12 @@
+body {
+    background-position: center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    color: white;
+}
+.butt {
+    border: solid 2px white;
+    border-radius: 20px;
+    background: #7700cf;
+    color: white;
+}
