@@ -9,10 +9,10 @@
         <div class="low-screen-width-balance">
             <div class="balance-low-screen">
                 <div class="balance-low-screen-balance">
-                    Ваш баланс
+                    <nobr class="balance-text">Ваш баланс</nobr>
                     <br>
                     999999
-                    <i class="fa-solid fa-coins"></i>
+                    <i class="fa-solid fa-coins balance-coins"></i>
                 </div>
                 <button class="butt balance-butt">Пополнить</button>
             </div>
@@ -31,9 +31,9 @@
 
                 <div class="normal-screen-balance-block">
                     <div class="balance">
-                        <nobr>Ваш баланс</nobr>
+                        <nobr class="balance-text">Ваш баланс</nobr>
                         <br>
-                        999999 <i class="fa-solid fa-coins"></i>
+                        999999 <i class="fa-solid fa-coins balance-coins"></i>
                     </div>
                     <button class="butt balance-butt">Пополнить</button>
                 </div>
@@ -41,31 +41,29 @@
             </div>
         </div>
     </div>
-        <div class="cards-area">
-            @for ($i = 0; $i < 18; $i++)
-                <div class="card">
-                    <img src="{{ URL::asset('img/Hybrid_Solar_Panel_y2uSWXI.png') }}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <div class="card-title">
-                                <center>
-                                    <h4>Гибридная солнечная панель</h4>
-                                </center>
-                        </div>
-                        <div class="card-text">
-                                Advanced solar panels
-                        </div>
+    <div class="cards-area">
+        @for ($i = 0; $i < 15; $i++)
+            <div class="card">
+                <img src="{{ URL::asset('img/Hybrid_Solar_Panel_y2uSWXI.png') }}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <div class="card-title">
                         <center>
-                            <a href="#" class="btn butt card-btn">
-                                999
-                                <i class="fa-solid fa-coins"></i></a>
+                            <h4>Гибридная солнечная панель</h4>
                         </center>
-
                     </div>
+                    <div class="card-text">
+                        Advanced solar panels
+                    </div>
+                    <center>
+                        <button class="butt card-btn">
+                            999
+                            <i class="fa-solid fa-coins card-coins"></i></a>
+                        </button>
+                    </center>
                 </div>
-            @endfor
-
-        </div>
-
+            </div>
+        @endfor
+    </div>
 
 @endsection
 @section('scripts')

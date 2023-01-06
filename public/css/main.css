@@ -8,4 +8,12 @@ body {
     border-radius: 20px;
     background: #5618db;
     color: white;
+    border: none;
+}
+.butt:hover {
+    transition: 0.3s;
+    background: #4814B7;
+}
+.butt:active {
+    background: #6B26FF;
 }
