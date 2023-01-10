@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('shop');
 });
+Route::get('/data',  \App\Http\Controllers\DataController::class)->name('data');

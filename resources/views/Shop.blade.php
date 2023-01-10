@@ -2,24 +2,32 @@
 @section('links')
         <link rel="stylesheet" href="{{ asset('css/shop.css') }}">
 @endsection
-@section('title')
-    Магазин предметов
-@endsection
+@section('title')Магазин предметов@endsection
 @section('body')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-up-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Покупка предмета</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Покупка: «Гибридная солнечная панель»</h5>
                     <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid animi aut autem consequuntur corporis cupiditate delectus distinctio dolor dolore doloribus ducimus, eaque esse est et fugiat ipsa labore minus molestiae molestias nam optio possimus provident quidem sit veritatis voluptatem?
+
+                    <form action="{{ route('data') }}" id="buy-form" method="get">
+                        @csrf
+                        <center><input class="buy-item-range" value="1" name="items-count"></center>
+                        <input value="1" type="range" class="form-range" min="1" max="100" step="1" id="customRange3" >
+                    </form>
+                    <label for="customRange3" class="buy-label">Выберите колличество</label>
+                    <p class="modal-cost">
+
+                    </p>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" form="buy-form" class="btn btn-primary" value="Перейти к оплате">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Отменить</button>
                 </div>
             </div>
         </div>

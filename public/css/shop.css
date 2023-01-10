@@ -178,3 +178,16 @@
     width: 100px;
     padding: 7px;
 }
+.buy-item-range {
+   text-align: center;
+    outline: none;
+    background: none;
+    width: 50px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    color: lightgray;
+    font-size: 15px;
+}
+.buy-label {
+    color: lightgray;
+}

@@ -43,3 +43,14 @@ body {
     align-items: center;
     min-height: calc(65% - var(--bs-modal-margin) * 2);
 }
+.modal-cost {
+    float: right;
+}
+.cost {
+    color: gold;
+    font-size: 20px;
+    font-style: normal;
+}
+.modal-coins {
+    color: gold;
+}
