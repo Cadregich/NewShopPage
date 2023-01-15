@@ -17,3 +17,5 @@ Route::get('/', function () {
     return view('shop');
 });
 Route::get('/data',  \App\Http\Controllers\DataController::class)->name('data');
+Route::get('/create',  \App\Http\Controllers\CreateController::class)->name('create');
+Route::post('/create',  \App\Http\Controllers\StoreController::class)->name('store');
