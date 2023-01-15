@@ -1,14 +1,13 @@
-.shop-header-panel {
+#shop-header-panel {
     margin: auto;
-    width: 70%;
+    width: 60%;
     height: 80px;
-    background: indigo;
+    background: #25033D;
     margin-top: 20px;
-    border-radius: 50px 50px 0 0;
+    border-radius: 5px;
     padding: 10px;
-    padding-top: 20px;
 }
-.shop-header-panel-body {
+#shop-header-panel-body {
     /*background: gray;*/
     display: flex;
     align-items: center;
@@ -16,29 +15,30 @@
     height: 100%;
 }
 
-.cards-area {
+#cards-area {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     margin: auto;
-    width: 100%;
-    height: 1000px;
-    background: rgba(0,0,0,0.1);
+    margin-top: 5px;
+    width: 80%;
 }
-.search-end-filter {
+#search-end-filter {
     display: flex;
     justify-items: center;
     align-items: center;
     width: 100%;
 }
-.search {
+#search {
     border: none;
     border-bottom: 1px solid gray;
 }
-.form-search {
+#form-search {
     position: relative;
     margin-left: 5px;
     width: 250px;
 }
-.search {
+#search {
     z-index: 10;
     width: 100%;
     height: 42px;
@@ -48,7 +48,7 @@
     outline: none;
     color: #9E9C9C;
 }
-.sub-search {
+#sub-search {
     position: absolute;
     top: 0;
     right: 0;
@@ -58,53 +58,136 @@
     background: #7617AC;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
-}
-.sub-search:before {
-    font-family: FontAwesome;
-    content: "\f002";
     font-size: 20px;
+}
+#sub-search:before {
+    font-family: FontAwesome, serif;
+    content: "\f002";
+
     color: #F9F0DA;
 }
-.balance {
+#sub-search:hover, #sub-search:active {
+    font-size: 24px;
+}
+#balance {
+    margin-right: 5px;
     font-size: 18px;
 }
-.balance-butt {
-    margin-left: 5px;
-    min-width: 100px;
-    font-size: 16px;
-    width: 13%;
-    height: 80%;
+#balance-text {
+    font-size: 16px !important;
 }
-.mod-butt {
+#balance-butt {
+    margin-left: 5px;
+    min-width: 102px;
+    font-size: 16px;
+    font-weight: 500;
+    width: 16%;
+    height: 35px;
+    border: none;
+}
+.fa-coins {
+    color: lightgray;
+}
+#mod-butt {
     margin-left: 10px;
     height: 40px;
-    border-radius: 15px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px !important;
+    border: none;
 }
-.normal-screen-balance-block {
+#normal-screen-balance-block {
     display: flex;
     align-items: center;
     margin-left: auto;
 }
-.low-screen-width-balance {
+#low-screen-width-balance {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.balance-low-screen {
+#balance-low-screen {
     display: flex;
     align-items: center;
-    background: indigo;
+    background: #25033D;
     padding: 10px;
     border-radius: 20px;
 }
 @media (max-width: 480px) {
-    .mod-butt {
+    #mod-butt {
         height: 50px !important;
     }
 }
-
 @media (max-width: 1000px) {
-    .shop-header-panel {
-        width: 100%;
+
+}
+@media (max-width: 680px) {
+    #mod-butt {
+        font-size: 11px;
     }
+    #shop-header-panel {
+        width: 80%;
+    }
+}
+@media (max-width: 600px) {
+    #card {
+
+    }
+    #card-img-top {
+
+    }
+    #card-title {
+
+    }
+    #card-text {
+
+    }
+    #card-btn {
+
+    }
+}
+.card {
+    width: 270px;
+    height: 320px !important;
+    background: #25033D !important;
+    border: 2px solid rgba(0,0,0,0.2) !important;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 20px !important;
+}
+.card-img-top {
+    width: 90px !important;
+    margin: auto;
+    margin-top: 20px;
+}
+.card-title {
+    height: 50px;
+}
+.card-text {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 15px !important;
+    font-size: 15px;
+    height: 30px;
+    color: gray;
+}
+.card-btn {
+    font-size: 18px !important;
+    margin-top: 30px;
+    width: 100px;
+    padding: 7px;
+}
+.buy-item-range {
+   text-align: center;
+    outline: none;
+    background: none;
+    width: 50px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    color: lightgray;
+    font-size: 15px;
+}
+.buy-label {
+    color: lightgray;
 }
