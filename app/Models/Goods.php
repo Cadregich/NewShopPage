@@ -18,4 +18,7 @@ class Goods extends Model
         return $this->belongsToMany(Associations::class,
             'goods_associations', 'goods_id', 'associations_id');
     }
+    public function mod() {
+        return $this->belongsTo(Mods::class, 'mod_id', 'id');
+    }
 }

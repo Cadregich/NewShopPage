@@ -10,6 +10,6 @@ class Mods extends Model
     protected $fillable = ['title'];
     use HasFactory;
     public function goods() {
-        return $this->hasMany(Goods::class, 'mod', 'id');
+        return $this->hasMany(Goods::class, 'mod_id', 'id');
     }
 }

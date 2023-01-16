@@ -13,9 +13,9 @@ class StoreController extends Controller
     {
         $data = $request->validated();
         $img = $request->file('img');;
-        $mod = $data['mod'];
+        $mod = $data['mod_id'];
         $associations = $this->getAssociationsFromString($request['associations']);
-        unset($data['associations'], $data['img'], $data['mod']);
+        unset($data['associations'], $data['img'], $data['mod_id']);
         $latestItemId = Goods::first() === null ? 0 : Goods::latest()->first()->id;
 
         try {
@@ -56,7 +56,7 @@ class StoreController extends Controller
     {
         return Goods::create([
             'name' => $data['name'],
-            'mod' => $modId,
+            'mod_id' => $modId,
             'img' => 'uploads/item' . ($latestItemId + 1) . '.' . 'png',
             'price' => $data['price'],
         ]);

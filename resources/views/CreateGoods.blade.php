@@ -11,7 +11,7 @@
         </div>
         <div class="mb-3">
             <label for="addItemMod" class="form-label">Мод</label>
-            <input type="text" class="form-control" name="mod" id="addItemMod">
+            <input type="text" class="form-control" name="mod_id" id="addItemMod">
         </div>
         <div class="mb-3">
             <label for="addItemImage" class="form-label">Картинка</label>
