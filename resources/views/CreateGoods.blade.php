@@ -26,6 +26,11 @@
             <input type="text" class="form-control" name="associations" id="addItemAssociations">
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
+        @if (session('status'))
+            <div class="text-success mt-3">
+                {{ session('status') }}
+            </div>
+        @endif
     </form>
 
 @endsection

@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services\Goods;
 
-use App\Http\Requests\CreateRequest;
 use App\Models\Associations;
 use App\Models\Goods;
 use App\Models\Mods;
 use Illuminate\Support\Facades\DB;
-class StoreController extends Controller
+
+/**
+ * @method static class($request)
+ */
+class Store
 {
-    public function __invoke(CreateRequest $request)
+    public function __invoke($request)
     {
         $data = $request->validated();
         $img = $request->file('img');;
@@ -25,19 +28,21 @@ class StoreController extends Controller
             $this->syncAssociations($associations, $goods);
             $this->storeImg($img, $latestItemId);
             DB::commit();
+            return 'Успешно загруженно';
         } catch (\Exception $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
+            $message = $exception->getMessage();
+            return 'Неудачная загрузка: '.$message;
         }
     }
-    private function getAssociationsFromString($string)
+
+    public function getAssociationsFromString($string)
     {
         $associations = trim(str_replace(" ", "", $string));
         $associations = explode(',', $associations);
         return array_diff($associations, ['']);
     }
-
-    private function syncAssociations($associations, $goods)
+    public function syncAssociations($associations, $goods)
     {
         $attachAssociations = [];
         $attachAssociationsIds = [];
@@ -51,8 +56,13 @@ class StoreController extends Controller
         }
         $goods->associations()->sync($attachAssociationsIds);
     }
-
-    private function createGoods($data, $latestItemId, $modId)
+    public function createMod($mod)
+    {
+        return Mods::firstOrCreate([
+            'title' => $mod
+        ]);
+    }
+    public function createGoods($data, $latestItemId, $modId)
     {
         return Goods::create([
             'name' => $data['name'],
@@ -61,16 +71,8 @@ class StoreController extends Controller
             'price' => $data['price'],
         ]);
     }
-
-    private function storeImg($img, $latestItemId)
+    public function storeImg($img, $latestItemId)
     {
         $img->storeAs('uploads', 'item' . ($latestItemId + 1) . '.' . $img->extension(), 'public');
-    }
-
-    private function createMod($mod)
-    {
-        return Mods::firstOrCreate([
-            'title' => $mod
-        ]);
     }
 }
