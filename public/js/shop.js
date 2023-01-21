@@ -11,6 +11,7 @@ $(document).ready(function () {
         let range = $("#itemRange");
         let itemCost = $(this).attr('item-cost');
         let itemName = $(this).attr('item-name');
+
         $('#exampleModalLabel').html('Покупка: «' + itemName + '»');
 
         $(".modal-cost").html(`<i class="cost">${itemCost}</i>` + ' <i class="fa-solid fa-coins modal-coins"></i>' +
@@ -25,8 +26,6 @@ $(document).ready(function () {
 
         $(document).on('input change', '.buy-item-range', function () {
             // Валидация инпута с кол-вом предмета.
-            let itemsCost = this.value * itemCost;
-
             rangeText.val(parseInt(rangeText.val()));
             if (rangeText.val() > 999) {
                 rangeText.val(999);
@@ -37,6 +36,7 @@ $(document).ready(function () {
             if (isNaN(rangeText.val())) {
                 rangeText.val(1);
             }
+            let itemsCost = this.value * itemCost;
             // range.val($(this).val());
             if (rangeText.val() === '') {
                 range.val(1);
@@ -47,6 +47,9 @@ $(document).ready(function () {
                     ' за ' + this.value + ' шт.');
             }
         });
-
+        $('.btn-danger, .modal-close').click(function () {
+            rangeText.val(1);
+            range.val(1);
+        });
     });
 });

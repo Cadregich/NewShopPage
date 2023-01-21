@@ -24,7 +24,7 @@ class Store
         try {
             DB::beginTransaction();
             $modId = $this->createMod($mod)->id;
-            $goods = $this->createGoods($data, $latestItemId, $modId);
+            $goods = $this->createGoods($data, $latestItemId, $modId, $img->extension());
             $this->syncAssociations($associations, $goods);
             $this->storeImg($img, $latestItemId);
             DB::commit();
@@ -62,12 +62,12 @@ class Store
             'title' => $mod
         ]);
     }
-    public function createGoods($data, $latestItemId, $modId)
+    public function createGoods($data, $latestItemId, $modId, $imgExtension)
     {
         return Goods::create([
             'name' => $data['name'],
             'mod_id' => $modId,
-            'img' => 'uploads/item' . ($latestItemId + 1) . '.' . 'png',
+            'img' => 'item' . ($latestItemId + 1) . '.' . $imgExtension,
             'price' => $data['price'],
         ]);
     }

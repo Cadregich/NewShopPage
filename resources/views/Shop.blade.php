@@ -76,7 +76,8 @@
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
             <div class="card">
-                <img src="{{ URL::asset('img/Hybrid_Solar_Panel_y2uSWXI.png') }}" class="card-img-top" alt="">
+                <img src="{{ URL::asset('storage/uploads/'.$goodsUnit->img) }}" class="card-img-top"
+                     alt="{{ $goodsUnit->name }}">
                 <div class="card-body">
                     <div class="card-title">
                         <center>
@@ -87,7 +88,8 @@
                         {{ \App\Models\Mods::find($goodsUnit->mod_id)->title }}
                     </div>
                     <center>
-                        <button class="butt card-btn" item-name="{{ $goodsUnit->name }}" item-cost="{{ $goodsUnit->price }}" data-bs-toggle="modal"
+                        <button class="butt card-btn" item-name="{{ $goodsUnit->name }}"
+                                item-cost="{{ $goodsUnit->price }}" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                             {{ $goodsUnit->price }}
                             <i class="fa-solid fa-coins" id="card-coins"></i>
