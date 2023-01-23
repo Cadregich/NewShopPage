@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Requests\CreateRequest;
+use App\Http\Requests\GoodsSearchRequest;
 use App\Services\Goods\Store;
 use App\Services\Service;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,9 +18,10 @@ class Goods extends Model
     protected $table = 'goods';
     protected $guarded = [];
     private $service;
+
     public function __construct(array $attributes = [])
     {
-        $this->service = new Service();
+        $this->service = new Store();
         parent::__construct($attributes);
     }
 

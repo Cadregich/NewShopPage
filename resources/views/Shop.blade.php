@@ -58,7 +58,17 @@
                         <input id="search" type="text" name="search" placeholder="Поиск предметов">
                         <button id="sub-search" type="submit"></button>
                     </form>
-                    <button class="butt" id="mod-butt">Выбрать мод</button>
+                    <div class="btn-group">
+                        <button type="button" class="butt btn-secondary dropdown-toggle" id="mod-butt"
+                                data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            Выбрать мод
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
+                            <li><a class="dropdown-item" href="#">Menu item</a></li>
+                            <li><a class="dropdown-item" href="#">Menu item</a></li>
+                            <li><a class="dropdown-item" href="#">Advanced solar panels</a></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div id="normal-screen-balance-block">
@@ -75,8 +85,16 @@
     </div>
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
+{{--            @dd($checkHandler($searchQuery, $goodsUnit))--}}
+            @if(isset($searchQuery) && implode($searchQuery) !== '')
+                @if(!$checkHandler($searchQuery, $goodsUnit))
+                    @continue
+                @endif
+            @endif
+
             <div class="card">
-                <img src="{{ URL::asset('img/Hybrid_Solar_Panel_y2uSWXI.png') }}" class="card-img-top" alt="">
+                <img src="{{ URL::asset('storage/uploads/'.$goodsUnit->img) }}" class="card-img-top"
+                     alt="{{ $goodsUnit->name }}">
                 <div class="card-body">
                     <div class="card-title">
                         <center>
@@ -87,7 +105,8 @@
                         {{ \App\Models\Mods::find($goodsUnit->mod_id)->title }}
                     </div>
                     <center>
-                        <button class="butt card-btn" item-name="{{ $goodsUnit->name }}" item-cost="{{ $goodsUnit->price }}" data-bs-toggle="modal"
+                        <button class="butt card-btn" item-name="{{ $goodsUnit->name }}"
+                                item-cost="{{ $goodsUnit->price }}" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                             {{ $goodsUnit->price }}
                             <i class="fa-solid fa-coins" id="card-coins"></i>

@@ -5,17 +5,16 @@ namespace App\Services\Goods;
 use App\Models\Associations;
 use App\Models\Goods;
 use App\Models\Mods;
+use App\Services\Service;
 use Illuminate\Support\Facades\DB;
 
-/**
- * @method static class($request)
- */
+
 class Store
 {
-    public function __invoke($request)
+    public function GoodsStore($request)
     {
         $data = $request->validated();
-        $img = $request->file('img');;
+        $img = $request->file('img');
         $mod = $data['mod_id'];
         $associations = $this->getAssociationsFromString($request['associations']);
         unset($data['associations'], $data['img'], $data['mod_id']);
@@ -24,7 +23,7 @@ class Store
         try {
             DB::beginTransaction();
             $modId = $this->createMod($mod)->id;
-            $goods = $this->createGoods($data, $latestItemId, $modId);
+            $goods = $this->createGoods($data, $latestItemId, $modId, $img->extension());
             $this->syncAssociations($associations, $goods);
             $this->storeImg($img, $latestItemId);
             DB::commit();
@@ -62,12 +61,12 @@ class Store
             'title' => $mod
         ]);
     }
-    public function createGoods($data, $latestItemId, $modId)
+    public function createGoods($data, $latestItemId, $modId, $imgExtension)
     {
         return Goods::create([
             'name' => $data['name'],
             'mod_id' => $modId,
-            'img' => 'uploads/item' . ($latestItemId + 1) . '.' . 'png',
+            'img' => 'item' . ($latestItemId + 1) . '.' . $imgExtension,
             'price' => $data['price'],
         ]);
     }
