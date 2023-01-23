@@ -2,14 +2,13 @@
 
 namespace App\Services\Goods;
 
+use App\Http\Requests\CreateRequest;
 use App\Models\Associations;
 use App\Models\Goods;
 use App\Models\Mods;
 use Illuminate\Support\Facades\DB;
 
-/**
- * @method static class($request)
- */
+
 class Store
 {
     public function __invoke($request)

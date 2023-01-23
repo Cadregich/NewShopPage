@@ -75,6 +75,13 @@
     </div>
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
+{{--            @dd($checkHandler($searchQuery, $goodsUnit))--}}
+            @if(isset($searchQuery))
+                @if(!$checkHandler($searchQuery, $goodsUnit))
+                    @continue
+                @endif
+            @endif
+
             <div class="card">
                 <img src="{{ URL::asset('storage/uploads/'.$goodsUnit->img) }}" class="card-img-top"
                      alt="{{ $goodsUnit->name }}">

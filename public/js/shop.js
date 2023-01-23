@@ -5,7 +5,7 @@ $(document).ready(function () {
         $('#low-screen-width-balance').show();
         $('#search-end-filter').css('justify-content', 'center');
     }
-    // Работа с модальным окном при нажатии кнопки с покупкой предмета.
+    // Работа с модальным окном
     $('.card-btn').click(function () {
         let rangeText = $(".buy-item-range");
         let range = $("#itemRange");

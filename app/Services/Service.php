@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Services\Goods\Search;
 use App\Services\Goods\Store;
 
 class Service
@@ -10,4 +11,8 @@ class Service
         $store = new Store;
         return $store($request);
     }
+//    public function GoodsSearch($request) {
+//        $search = new Search;
+//        return $search($request, 12);
+//    }
 }
