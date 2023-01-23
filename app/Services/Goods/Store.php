@@ -2,19 +2,19 @@
 
 namespace App\Services\Goods;
 
-use App\Http\Requests\CreateRequest;
 use App\Models\Associations;
 use App\Models\Goods;
 use App\Models\Mods;
+use App\Services\Service;
 use Illuminate\Support\Facades\DB;
 
 
 class Store
 {
-    public function __invoke($request)
+    public function GoodsStore($request)
     {
         $data = $request->validated();
-        $img = $request->file('img');;
+        $img = $request->file('img');
         $mod = $data['mod_id'];
         $associations = $this->getAssociationsFromString($request['associations']);
         unset($data['associations'], $data['img'], $data['mod_id']);

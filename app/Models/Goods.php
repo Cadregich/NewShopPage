@@ -21,7 +21,7 @@ class Goods extends Model
 
     public function __construct(array $attributes = [])
     {
-        $this->service = new Service();
+        $this->service = new Store();
         parent::__construct($attributes);
     }
 
@@ -29,12 +29,12 @@ class Goods extends Model
     public function associations()
     {
         return $this->belongsToMany(Associations::class,
-            'goods_associations', 'goods_id', 'associations_id')->get();
+            'goods_associations', 'goods_id', 'associations_id');
     }
 
     public function mod()
     {
-        return $this->belongsTo(Mods::class, 'mod_id', 'id')->get();
+        return $this->belongsTo(Mods::class, 'mod_id', 'id');
     }
 
     public function store(CreateRequest $request)

@@ -2,20 +2,19 @@
 
 namespace App\Services\Goods;
 
-use App\Http\Requests\GoodsSearchRequest;
 use App\Models\Goods;
+use App\Services\Service;
 
 class Search
 {
-    public function __invoke($search, $goodsUnit): bool
+    public function Search($search, $goodsUnit): bool
     {
         $search = implode($search);
         $goods = Goods::find($goodsUnit->id);
-        $associations = $goods->associations();
+        $associations = $goods->associations()->get();
         $associations = $this->getArrayAssociations($associations);
-        $mod = $goods->mod()[0]->title;
-        $fullAssociations = $this->getAllSearchAssociations($associations, $goodsUnit->name, $mod);
-        return $isFind = $this->find($search, $fullAssociations);
+        $associations[] = $goodsUnit->name;
+        return $this->find($search, $associations);
     }
     private function getArrayAssociations($associations): array
     {
@@ -26,13 +25,7 @@ class Search
         return $associationsArray;
     }
 
-    private function getAllSearchAssociations(&$associations, $name, $mod): array
-    {
-        array_push($associations, $name, $mod);
-        return $associations;
-    }
-
-    private function find($subject, &$queryData): bool
+    private function find($subject, $queryData): bool
     {
         foreach ($queryData as $item) {
             if (preg_match("/$subject/", mb_strtolower($item))) {

@@ -58,7 +58,17 @@
                         <input id="search" type="text" name="search" placeholder="Поиск предметов">
                         <button id="sub-search" type="submit"></button>
                     </form>
-                    <button class="butt" id="mod-butt">Выбрать мод</button>
+                    <div class="btn-group">
+                        <button type="button" class="butt btn-secondary dropdown-toggle" id="mod-butt"
+                                data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            Выбрать мод
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
+                            <li><a class="dropdown-item" href="#">Menu item</a></li>
+                            <li><a class="dropdown-item" href="#">Menu item</a></li>
+                            <li><a class="dropdown-item" href="#">Advanced solar panels</a></li>
+                        </ul>
+                    </div>
                 </div>
 
                 <div id="normal-screen-balance-block">
@@ -76,7 +86,7 @@
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
 {{--            @dd($checkHandler($searchQuery, $goodsUnit))--}}
-            @if(isset($searchQuery))
+            @if(isset($searchQuery) && implode($searchQuery) !== '')
                 @if(!$checkHandler($searchQuery, $goodsUnit))
                     @continue
                 @endif

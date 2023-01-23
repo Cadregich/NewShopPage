@@ -1,10 +1,21 @@
 $(document).ready(function () {
     // Выводим баланс из верхней панели в отдельный блок при низкой ширине экрана
-    if ($(document).width() < 1000) {
-        $('#normal-screen-balance-block').hide();
-        $('#low-screen-width-balance').show();
-        $('#search-end-filter').css('justify-content', 'center');
+    function adaptiveBalanceBoard() {
+        if ($(document).width() < 1000) {
+            $('#normal-screen-balance-block').hide();
+            $('#low-screen-width-balance').show();
+            $('#search-end-filter').css('justify-content', 'center');
+        } else {
+            $('#low-screen-width-balance').hide();
+            $('#normal-screen-balance-block').show();
+            $('#search-end-filter').css('justify-content', 'start');
+        }
     }
+    adaptiveBalanceBoard();
+    $(window).resize(adaptiveBalanceBoard);
+
+
+
     // Работа с модальным окном
     $('.card-btn').click(function () {
         let rangeText = $(".buy-item-range");
@@ -25,7 +36,7 @@ $(document).ready(function () {
         });
 
         $(document).on('input change', '.buy-item-range', function () {
-            // Валидация инпута с кол-вом предмета.
+            // Валидация инпута с кол-вом предмета
             rangeText.val(parseInt(rangeText.val()));
             if (rangeText.val() > 999) {
                 rangeText.val(999);
