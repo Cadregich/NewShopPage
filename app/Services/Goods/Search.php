@@ -9,7 +9,6 @@ class Search
 {
     public function Search($search, $goodsUnit): bool
     {
-        $search = implode($search);
         $goods = Goods::find($goodsUnit->id);
         $associations = $goods->associations()->get();
         $associations = $this->getArrayAssociations($associations);

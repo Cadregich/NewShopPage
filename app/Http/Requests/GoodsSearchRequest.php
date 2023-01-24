@@ -24,7 +24,8 @@ class GoodsSearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'search' => ''
+            'search' => '',
+            'mod' => ''
         ];
     }
 }
