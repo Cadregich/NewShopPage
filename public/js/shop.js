@@ -11,10 +11,9 @@ $(document).ready(function () {
             $('#search-end-filter').css('justify-content', 'start');
         }
     }
+
     adaptiveBalanceBoard();
     $(window).resize(adaptiveBalanceBoard);
-
-
 
     // Работа с модальным окном
     $('.card-btn').click(function () {

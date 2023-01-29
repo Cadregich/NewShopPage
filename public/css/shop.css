@@ -193,4 +193,6 @@
 .buy-label {
     color: lightgray;
 }
-
+.dropdown-item:hover {
+    background: lightgray !important;
+}

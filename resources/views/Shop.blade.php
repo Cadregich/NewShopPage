@@ -55,20 +55,27 @@
 
                 <div id="search-end-filter">
                     <form method="get" id="form-search">
+                        @csrf
                         <input id="search" type="text" name="search" placeholder="Поиск предметов">
                         <button id="sub-search" type="submit"></button>
                     </form>
-                    <div class="btn-group">
-                        <button type="button" class="butt btn-secondary dropdown-toggle" id="mod-butt"
-                                data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                            Выбрать мод
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
-                            <li><a class="dropdown-item" href="#">Menu item</a></li>
-                            <li><a class="dropdown-item" href="#">Menu item</a></li>
-                            <li><a class="dropdown-item" href="#">Advanced solar panels</a></li>
-                        </ul>
-                    </div>
+                    <form method="get">
+                        @csrf
+                        <div class="btn-group">
+                            <button type="button" class="butt btn-secondary dropdown-toggle" id="mod-butt"
+                                    data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                Выбрать мод
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
+                                @foreach($mods as $mod)
+                                    <button type="submit" class="dropdown-item" name="mod" value="{{ $mod }}">
+                                        {{ $mod }}
+                                    </button>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </form>
+
                 </div>
 
                 <div id="normal-screen-balance-block">
@@ -85,13 +92,6 @@
     </div>
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
-{{--            @dd($checkHandler($searchQuery, $goodsUnit))--}}
-            @if(isset($searchQuery) && implode($searchQuery) !== '')
-                @if(!$checkHandler($searchQuery, $goodsUnit))
-                    @continue
-                @endif
-            @endif
-
             <div class="card">
                 <img src="{{ URL::asset('storage/uploads/'.$goodsUnit->img) }}" class="card-img-top"
                      alt="{{ $goodsUnit->name }}">
@@ -115,6 +115,10 @@
                 </div>
             </div>
         @endforeach
+        <div style="width: 100%">{{--Блок-костыль что-бы блок со страницами был всегда снизу карточек--}}</div>
+        <div class="mt-3">
+            {{ $goods->links() }}
+        </div>
     </div>
 @endsection
 @section('scripts')
