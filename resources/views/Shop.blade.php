@@ -92,12 +92,6 @@
     </div>
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
-            @if($modQuery && $modQuery !== '')
-                @if(\App\Models\Mods::find($goodsUnit->mod_id)->title !== $modQuery)
-                    @continue
-                @endif
-            @endif
-
             <div class="card">
                 <img src="{{ URL::asset('storage/uploads/'.$goodsUnit->img) }}" class="card-img-top"
                      alt="{{ $goodsUnit->name }}">
