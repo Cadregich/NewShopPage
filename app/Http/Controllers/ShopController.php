@@ -11,14 +11,8 @@ class ShopController extends BaseController
 {
     public function __invoke(GoodsSearchRequest $request)
     {
-        $mods = Mods::all();
-        $modsArray = [];
-        foreach ($mods as $mod) {
-            $modsArray[] = $mod->title;
-        }
-        sort($modsArray);
         if (isset($request->validated()['search'])) {
-            $searchQuery = $request->validated()['search'];
+            $searchQuery = mb_strtolower($request->validated()['search']);
         } else {
             $searchQuery = false;
         }
@@ -27,14 +21,17 @@ class ShopController extends BaseController
         } else {
             $modQuery = false;
         }
-
-        if (!$modQuery && !$searchQuery) {
-            $goods = Goods::paginate(15);
+        if ($searchQuery) {
+            $goods = Goods::whereHas('associations', function ($query) use ($searchQuery) {
+                $query->where('title', 'like', '%' . $searchQuery . '%');
+            });
+            $goods = Goods::where('name', 'LIKE', '%' . $searchQuery . '%')->union($goods)->paginate(15);
         } else {
-            $goods = Goods::all();
+            $goods = Goods::paginate(15);
         }
-        $checkHandler = new Search;
-        return view('shop', compact('goods','modsArray',
-            'searchQuery', 'checkHandler', 'modQuery'));
+        $mods = Mods::all();
+        $mods = $mods->pluck('title')->sort();
+        return view('shop', compact('goods', 'mods',
+            'searchQuery', 'modQuery'));
     }
 }

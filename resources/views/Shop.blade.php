@@ -67,7 +67,7 @@
                                 Выбрать мод
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
-                                @foreach($modsArray as $mod)
+                                @foreach($mods as $mod)
                                     <button type="submit" class="dropdown-item" name="mod" value="{{ $mod }}">
                                         {{ $mod }}
                                     </button>
@@ -92,12 +92,6 @@
     </div>
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
-            {{--            @dd($checkHandler($searchQuery, $goodsUnit))--}}
-            @if($searchQuery && $searchQuery !== '')
-                @if(!$checkHandler->Search($searchQuery, $goodsUnit))
-                    @continue
-                @endif
-            @endif
             @if($modQuery && $modQuery !== '')
                 @if(\App\Models\Mods::find($goodsUnit->mod_id)->title !== $modQuery)
                     @continue
@@ -127,12 +121,10 @@
                 </div>
             </div>
         @endforeach
-            <div style="width: 100%">{{--Блок-костыль что-бы блок со страницами был всегда снизу карточек--}}</div>
-            @if(!$modQuery && !$searchQuery)
-                <div class="mt-3">
-                    {{ $goods->links() }}
-                </div>
-            @endif
+        <div style="width: 100%">{{--Блок-костыль что-бы блок со страницами был всегда снизу карточек--}}</div>
+        <div class="mt-3">
+            {{ $goods->links() }}
+        </div>
     </div>
 @endsection
 @section('scripts')
