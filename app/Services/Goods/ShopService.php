@@ -20,14 +20,24 @@ class ShopService extends Service
         } else {
             $modQuery = false;
         }
-        $goods = $this->modHandler($modQuery);
+
         $goodsSearch = $this->searchHandler($searchQuery, $modQuery);
-        if ($goodsSearch) $goods = $goodsSearch;
+        $modId = Mods::where('title', $modQuery)->get()[0]->id;
+        if ($searchQuery && $modQuery) {
+            $goods = $goodsSearch->where('mod_id', $modId);
+        }
+
+        if ($searchQuery && !$modQuery) {
+            $goods = $goodsSearch;
+        }
+        if ($modQuery && !$searchQuery) {
+            $goods = Goods::where('mod_id', $modId);
+        }
 
         if (!$modQuery && !$searchQuery) {
-            $goods = Goods::paginate(15);
+            $goods = Goods::orderBy('name', 'asc')->paginate(15)->withQueryString();
         } else {
-            $goods = $goods->paginate(15);
+            $goods = $goods->orderBy('name', 'asc')->paginate(15)->withQueryString();
         }
         return $goods;
     }
@@ -44,11 +54,11 @@ class ShopService extends Service
 
     private function searchHandler($searchQuery, $modQuery)
     {
-        if ($searchQuery && !$modQuery) {
-            $goodsSearch = Goods::whereHas('associations', function ($query) use ($searchQuery) {
-                $query->where('title', 'like', '%' . $searchQuery . '%');
-            });
-            return $goods = Goods::where('name', 'LIKE', '%' . $searchQuery . '%')->union($goodsSearch);
+        if ($searchQuery) {
+            return $goods = Goods::where('name', 'LIKE', '%' . $searchQuery . '%')
+                ->orWhereHas('associations', function ($query) use ($searchQuery) {
+                    $query->where('title', 'like', '%' . $searchQuery . '%');
+                });
         } else {
             return false;
         }
