@@ -57,7 +57,7 @@
                     <form method="get" id="form-search">
                         @csrf
                         <input id="search" type="text" name="search" placeholder="Поиск предметов">
-                        <button id="sub-search" type="submit"></button>
+                        <button id="sub-search" type="submit" title="Нажав на лупу можно сбросить параметры поиска"></button>
                     </form>
                     <form method="get">
                         @csrf

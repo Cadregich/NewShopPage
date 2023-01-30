@@ -22,6 +22,9 @@ $(document).ready(function () {
         let itemCost = $(this).attr('item-cost');
         let itemName = $(this).attr('item-name');
 
+        rangeText.val(1);
+        range.val(1);
+
         $('#exampleModalLabel').html('Покупка: «' + itemName + '»');
 
         $(".modal-cost").html(`<i class="cost">${itemCost}</i>` + ' <i class="fa-solid fa-coins modal-coins"></i>' +
@@ -56,10 +59,6 @@ $(document).ready(function () {
                 $(".modal-cost").html(`<i class="cost">${itemsCost}</i>` + ' <i class="fa-solid fa-coins modal-coins"></i>' +
                     ' за ' + this.value + ' шт.');
             }
-        });
-        $('.btn-danger, .modal-close').click(function () {
-            rangeText.val(1);
-            range.val(1);
         });
     });
 });
