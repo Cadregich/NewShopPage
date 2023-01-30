@@ -19,8 +19,8 @@
 
                     <form action="{{ route('data') }}" id="buy-form" method="get">
                         @csrf
-                        <center>
-                            <input type="text" class="buy-item-range" value="1" name="items-count"></center>
+
+                        <input type="text" class="buy-item-range" value="1" name="items-count">
                         <input value="1" type="range" class="form-range" min="1" max="100" step="1" id="itemRange">
                     </form>
                     <label for="customRange3" class="buy-label">Выберите колличество</label>
@@ -57,7 +57,8 @@
                     <form method="get" id="form-search">
                         @csrf
                         <input id="search" type="text" name="search" placeholder="Поиск предметов">
-                        <button id="sub-search" type="submit" title="Нажав на лупу можно сбросить параметры поиска"></button>
+                        <button id="sub-search" type="submit"
+                                title="Нажав на лупу можно сбросить параметры поиска"></button>
                     </form>
                     <form method="get">
                         @csrf
@@ -75,9 +76,7 @@
                             </ul>
                         </div>
                     </form>
-
                 </div>
-
                 <div id="normal-screen-balance-block">
                     <div id="balance">
                         <nobr id="balance-text">Ваш баланс</nobr>
@@ -86,7 +85,6 @@
                     </div>
                     <button class="butt" id="balance-butt">Пополнить</button>
                 </div>
-
             </div>
         </div>
     </div>
@@ -97,27 +95,25 @@
                      alt="{{ $goodsUnit->name }}">
                 <div class="card-body">
                     <div class="card-title">
-                        <center>
-                            <h4>{{ $goodsUnit->name }}</h4>
-                        </center>
+                        <h4>{{ $goodsUnit->name }}</h4>
                     </div>
                     <div class="card-text">
                         {{ \App\Models\Mods::find($goodsUnit->mod_id)->title }}
                     </div>
-                    <center>
+                    <div class="card-button-area">
                         <button class="butt card-btn" item-name="{{ $goodsUnit->name }}"
                                 item-cost="{{ $goodsUnit->price }}" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                             {{ $goodsUnit->price }}
                             <i class="fa-solid fa-coins" id="card-coins"></i>
                         </button>
-                    </center>
+                    </div>
                 </div>
             </div>
         @endforeach
         <div style="width: 100%">{{--Блок-костыль что-бы блок со страницами был всегда снизу карточек--}}</div>
         <div class="mt-3">
-            {{ $goods->links() }}
+            {{ $goods->onEachSide(0)->links() }}
         </div>
     </div>
 @endsection

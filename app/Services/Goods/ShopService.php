@@ -42,16 +42,6 @@ class ShopService extends Service
         return $goods;
     }
 
-    private function modHandler($modQuery)
-    {
-        if ($modQuery) {
-            $modId = Mods::where('title', $modQuery)->get()[0]->id;
-            return $goods = Goods::where('mod_id', $modId);
-        } else {
-            return false;
-        }
-    }
-
     private function searchHandler($searchQuery, $modQuery)
     {
         if ($searchQuery) {
