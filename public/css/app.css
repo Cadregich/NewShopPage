@@ -4686,13 +4686,13 @@ textarea.form-control-lg {
   background-color: var(--bs-pagination-hover-bg);
   border-color: var(--bs-pagination-hover-border-color);
 }
-.page-link:focus {
-  z-index: 3;
-  color: var(--bs-pagination-focus-color);
-  background-color: var(--bs-pagination-focus-bg);
-  outline: 0;
-  box-shadow: var(--bs-pagination-focus-box-shadow);
-}
+/*.page-link:focus {*/
+/*  z-index: 3;*/
+/*  color: var(--bs-pagination-focus-color);*/
+/*  background-color: var(--bs-pagination-focus-bg);*/
+/*  outline: 0;*/
+/*  box-shadow: var(--bs-pagination-focus-box-shadow);*/
+/*}*/
 .page-link.active, .active > .page-link {
   z-index: 3;
   color: var(--bs-pagination-active-color);
