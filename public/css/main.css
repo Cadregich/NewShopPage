@@ -92,4 +92,8 @@ body {
     background-color: #35015b;
     box-shadow: none !important;
 }
-
+@media (max-width: 500px) {
+    .page-link {
+        font-size: 10px;
+    }
+}

@@ -38,30 +38,42 @@
     <i id="fa-regular fa-coin-blank"></i>
     <div id="container">
         {{--                Low screen width balance panel--}}
-        <div id="low-screen-width-balance" style="display:none;">
-            <div id="balance-low-screen">
-                <div id="balance-low-screen-balance">
-                    <nobr id="balance-text">Ваш баланс</nobr>
-                    <br>
-                    999999
-                    <i class="fa-solid fa-coins" id="balance-coins"></i>
+        <div id="low-screen-block">
+            <div id="low-screen-items" style="display:none;">
+                <div id="low-screen-width-balance">
+                    <div id="balance-low-screen">
+                        <div id="balance-low-screen-balance">
+                            <nobr id="balance-text">Ваш баланс</nobr>
+                            <br>
+                            999999
+                            <i class="fa-solid fa-coins" id="balance-coins"></i>
+                        </div>
+                        <button class="butt" id="balance-butt">Пополнить</button>
+
+                    </div>
+                    <div class="drop-filters-and-history-low-screen">
+                        <button class="butt reset-butt">Покупки</button>
+                    </div>
                 </div>
-                <button class="butt" id="balance-butt">Пополнить</button>
             </div>
         </div>
+
+
         {{--                ./Low screen width balance panel--}}
         <div id="shop-header-panel">
             <div id="shop-header-panel-body">
-
                 <div id="search-end-filter">
-                    <form method="get" id="form-search">
+                    <form method="get" id="items-filter">
+                        <div id="form-search">
+                            <input id="search" type="text" name="search" placeholder="Поиск предметов">
+                            <button id="sub-search" type="submit"
+                                    title="Нажав на лупу можно сбросить параметры поиска"></button>
+                        </div>
                         @csrf
-                        <input id="search" type="text" name="search" placeholder="Поиск предметов">
-                        <button id="sub-search" type="submit"
-                                title="Нажав на лупу можно сбросить параметры поиска"></button>
-                    </form>
-                    <form method="get">
-                        @csrf
+
+{{--                    </form>--}}
+{{--                    <form method="get">--}}
+{{--                        @csrf--}}
                         <div class="btn-group">
                             <button type="button" class="butt btn-secondary dropdown-toggle" id="mod-butt"
                                     data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -75,7 +87,12 @@
                                 @endforeach
                             </ul>
                         </div>
+                        <div class="drop-filters-and-history">
+                            <button class="butt reset-butt" id="reset-butt-normal-ss">Покупки</button>
+                        </div>
                     </form>
+
+
                 </div>
                 <div id="normal-screen-balance-block">
                     <div id="balance">
@@ -111,7 +128,7 @@
                 </div>
             </div>
         @endforeach
-        <div style="width: 100%">{{--Блок-костыль что-бы блок со страницами был всегда снизу карточек--}}</div>
+        <div style="width: 100%">{{--Блок-костыль что-бы пагинатор был всегда снизу карточек--}}</div>
         <div class="mt-3">
             {{ $goods->onEachSide(0)->links() }}
         </div>
