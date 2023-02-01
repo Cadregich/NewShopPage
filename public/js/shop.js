@@ -1,19 +1,24 @@
 $(document).ready(function () {
     // Выводим баланс из верхней панели в отдельный блок при низкой ширине экрана
     function adaptiveBalanceBoard() {
-        if ($(document).width() < 1000) {
+        if ($(document).width() < 1150) {
             $('#normal-screen-balance-block').hide();
-            $('#low-screen-width-balance').show();
+            $('#reset-butt-normal-ss').hide();
+            $('#low-screen-items').show();
             $('#search-end-filter').css('justify-content', 'center');
         } else {
-            $('#low-screen-width-balance').hide();
+            $('#low-screen-items').hide();
+            $('#reset-butt-normal-ss').show();
             $('#normal-screen-balance-block').show();
             $('#search-end-filter').css('justify-content', 'start');
         }
     }
 
     adaptiveBalanceBoard();
-    $(window).resize(adaptiveBalanceBoard);
+    $(window).resize(adaptiveBalanceBoard, function () {
+        adaptiveBalanceBoard();
+        console.log($(window).width());
+    });
 
     // Работа с модальным окном
     $('.card-btn').click(function () {

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GoodsSearchRequest;
-use App\Models\Goods;
 use App\Models\Mods;
 use App\Services\Goods\ShopService;
-use Illuminate\Pagination\Paginator;
 
 class ShopController
 {

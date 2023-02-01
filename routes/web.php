@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  ShopController::class)->name('data');
+Route::get('/',  ShopController::class);
 Route::get('/data',  DataController::class)->name('data');
 Route::get('/create',  CreateController::class)->name('create');
 Route::post('/create',  [Goods::class, 'store'])->name('store');
