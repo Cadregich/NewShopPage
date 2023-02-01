@@ -1,0 +1,11 @@
+#mods-inputs {
+    display: flex;
+}
+
+
+#mod-select-input {
+    width: 50%;
+}
+#mod-select-input>option {
+    text-align: center;
+}

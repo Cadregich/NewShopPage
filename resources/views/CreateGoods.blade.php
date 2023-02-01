@@ -1,5 +1,10 @@
 @extends('layouts/document')
-@section('title')Добавление товара@endsection
+@section('title')
+    Добавление товара
+@endsectionё
+@section('links')
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+@endsection
 @section('body')
 
     <form method="post" action="{{ route('store') }}" class="text-center w-25 m-auto" enctype="multipart/form-data">
@@ -10,8 +15,16 @@
             <input type="text" class="form-control" name="name" id="addItemName">
         </div>
         <div class="mb-3">
-            <label for="addItemMod" class="form-label">Мод</label>
-            <input type="text" class="form-control" name="mod_id" id="addItemMod">
+            <label for="mods-inputs" class="form-label">Мод</label><br>
+            <div id="mods-inputs">
+                <input class="form-control" id="mod-select-text" name="mod_id" placeholder="Добавить новый мод">
+                <select class="form-select" id="mod-select-input" name="mod_id">
+                    <option selected id="mod-selected">Выбрать мод</option>
+                    @foreach($mods as $mod)
+                        <option value="{{ $mod->id }}">{{ $mod->title }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <div class="mb-3">
             <label for="addItemImage" class="form-label">Картинка</label>
@@ -33,4 +46,8 @@
         @endif
     </form>
 
+@endsection
+@section('scripts')
+    <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
 @endsection

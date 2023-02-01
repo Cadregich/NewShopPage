@@ -4,53 +4,64 @@ namespace App\Services\Goods;
 
 use App\Models\Goods;
 use App\Models\Mods;
-use App\Services\Service;
 
-class ShopService extends Service
+class ShopService
 {
     public function Shop($request)
     {
-        if (isset($request->validated()['search'])) {
+        if ($request->has('search')) {
             $searchQuery = mb_strtolower($request->validated()['search']);
         } else {
             $searchQuery = false;
         }
-        if (isset($request->validated()['mod'])) {
+        if ($request->has('mod')) {
             $modQuery = $request->validated()['mod'];
         } else {
             $modQuery = false;
         }
 
-        $goodsSearch = $this->searchHandler($searchQuery, $modQuery);
-        $modId = Mods::where('title', $modQuery)->get()[0]->id;
-        if ($searchQuery && $modQuery) {
-            $goods = $goodsSearch->where('mod_id', $modId);
-        }
+        $goodsHasQueries = $this->validateQueries($searchQuery, $modQuery);
 
-        if ($searchQuery && !$modQuery) {
-            $goods = $goodsSearch;
-        }
-        if ($modQuery && !$searchQuery) {
-            $goods = Goods::where('mod_id', $modId);
-        }
-
-        if (!$modQuery && !$searchQuery) {
-            $goods = Goods::orderBy('name', 'asc')->paginate(15)->withQueryString();
+        if (!$goodsHasQueries) {
+            $goods = Goods::join('mods', 'goods.mod_id', '=', 'mods.id')
+                ->orderBy('mods.title', 'asc')->paginate(15)->withQueryString();
         } else {
-            $goods = $goods->orderBy('name', 'asc')->paginate(15)->withQueryString();
+            $goods = $goodsHasQueries->join('mods', 'goods.mod_id', '=', 'mods.id')
+                ->orderBy('mods.title', 'asc')->paginate(15)->withQueryString();
         }
         return $goods;
     }
 
-    private function searchHandler($searchQuery, $modQuery)
+    private function searchHandler($searchQuery)
     {
         if ($searchQuery) {
-            return $goods = Goods::where('name', 'LIKE', '%' . $searchQuery . '%')
-                ->orWhereHas('associations', function ($query) use ($searchQuery) {
-                    $query->where('title', 'like', '%' . $searchQuery . '%');
-                });
+            return Goods::where(function ($query) use ($searchQuery) {
+                $query->where('name', 'like', '%' . $searchQuery . '%')
+                    ->orWhereHas('associations', function ($query) use ($searchQuery) {
+                        $query->where('title', 'like', '%' . $searchQuery . '%');
+                    });
+            });
         } else {
             return false;
         }
+    }
+
+    private function validateQueries($searchQuery, $modQuery)
+    {
+        $goodsSearch = $this->searchHandler($searchQuery);
+        $modId = Mods::where('title', $modQuery)->get()[0]->id;
+        if ($searchQuery && $modQuery) {
+            $goods = $goodsSearch->where('mod_id', $modId);
+        } elseif ($searchQuery && !$modQuery) {
+            $goods = $goodsSearch;
+        } elseif ($modQuery && !$searchQuery) {
+            $goods = Goods::where('mod_id', $modId);
+        } else {
+            return false;
+        }
+        if ($modQuery) {
+            $goods->orderBy('name');
+        }
+        return $goods;
     }
 }

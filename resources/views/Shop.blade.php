@@ -6,7 +6,7 @@
     Магазин предметов
 @endsection
 @section('body')
-    <!-- Modal -->
+    {{--Modal--}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-up-centered">
             <div class="modal-content">
@@ -15,17 +15,16 @@
                     <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"><i
                             class="fa-solid fa-xmark"></i></button>
                 </div>
+                {{--Modal body--}}
                 <div class="modal-body">
-
                     <form action="{{ route('data') }}" id="buy-form" method="get">
                         @csrf
-
                         <input type="text" class="buy-item-range" value="1" name="items-count">
                         <input value="1" type="range" class="form-range" min="1" max="100" step="1" id="itemRange">
                     </form>
                     <label for="customRange3" class="buy-label">Выберите колличество</label>
                     <p class="modal-cost"></p>
-
+                    {{--/.Modal body--}}
                 </div>
                 <div class="modal-footer">
                     <input type="submit" form="buy-form" class="btn btn-primary" value="Перейти к оплате">
@@ -34,10 +33,10 @@
             </div>
         </div>
     </div>
-
+    {{--/.Modal--}}
     <i id="fa-regular fa-coin-blank"></i>
     <div id="container">
-        {{--                Low screen width balance panel--}}
+        {{--Low screen width balance panel--}}
         <div id="low-screen-block">
             <div id="low-screen-items" style="display:none;">
                 <div id="low-screen-width-balance">
@@ -49,7 +48,6 @@
                             <i class="fa-solid fa-coins" id="balance-coins"></i>
                         </div>
                         <button class="butt" id="balance-butt">Пополнить</button>
-
                     </div>
                     <div class="drop-filters-and-history-low-screen">
                         <button class="butt reset-butt">Покупки</button>
@@ -57,9 +55,8 @@
                 </div>
             </div>
         </div>
-
-
-        {{--                ./Low screen width balance panel--}}
+        {{--/.Low screen width balance panel--}}
+        {{--Shop head panel--}}
         <div id="shop-header-panel">
             <div id="shop-header-panel-body">
                 <div id="search-end-filter">
@@ -70,10 +67,6 @@
                                     title="Нажав на лупу можно сбросить параметры поиска"></button>
                         </div>
                         @csrf
-
-{{--                    </form>--}}
-{{--                    <form method="get">--}}
-{{--                        @csrf--}}
                         <div class="btn-group">
                             <button type="button" class="butt btn-secondary dropdown-toggle" id="mod-butt"
                                     data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -91,8 +84,6 @@
                             <button class="butt reset-butt" id="reset-butt-normal-ss">Покупки</button>
                         </div>
                     </form>
-
-
                 </div>
                 <div id="normal-screen-balance-block">
                     <div id="balance">
@@ -104,7 +95,9 @@
                 </div>
             </div>
         </div>
+        {{--/.Shop head panel--}}
     </div>
+    {{--Cards area--}}
     <div id="cards-area">
         @foreach($goods as $goodsUnit)
             <div class="card">
@@ -133,6 +126,7 @@
             {{ $goods->onEachSide(0)->links() }}
         </div>
     </div>
+    {{--/.Cards area--}}
 @endsection
 @section('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
