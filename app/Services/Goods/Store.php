@@ -34,13 +34,13 @@ class Store
         }
     }
 
-    public function getAssociationsFromString($string)
+    private function getAssociationsFromString($string)
     {
         $associations = trim(str_replace(" ", "", $string));
         $associations = explode(',', $associations);
         return array_diff($associations, ['']);
     }
-    public function syncAssociations($associations, $goods)
+    private function syncAssociations($associations, $goods)
     {
         $attachAssociations = [];
         $attachAssociationsIds = [];
@@ -54,13 +54,13 @@ class Store
         }
         $goods->associations()->sync($attachAssociationsIds);
     }
-    public function createMod($mod)
+    private function createMod($mod)
     {
         return Mods::firstOrCreate([
             'title' => $mod
         ]);
     }
-    public function createGoods($data, $latestItemId, $modId, $imgExtension)
+    private function createGoods($data, $latestItemId, $modId, $imgExtension)
     {
         return Goods::create([
             'name' => $data['name'],
@@ -69,7 +69,7 @@ class Store
             'price' => $data['price'],
         ]);
     }
-    public function storeImg($img, $latestItemId)
+    private function storeImg($img, $latestItemId)
     {
         $img->storeAs('uploads', 'item' . ($latestItemId + 1) . '.' . $img->extension(), 'public');
     }

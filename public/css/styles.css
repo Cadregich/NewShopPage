@@ -9,3 +9,8 @@
 #mod-select-input>option {
     text-align: center;
 }
+@media (min-width: 1000px) {
+    #create-form {
+        width: 35%;
+    }
+}

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Shop\CreateController;
+use App\Http\Controllers\Shop\DataController;
+use App\Http\Controllers\Shop\HistoryController;
+use App\Http\Controllers\Shop\ShopController;
 use App\Models\Goods;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +21,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',  ShopController::class);
-Route::get('/data',  DataController::class)->name('data');
-Route::get('/create',  CreateController::class)->name('create');
-Route::post('/create',  [Goods::class, 'store'])->name('store');
+Route::get('/',  MainPageController::class)->name('mainpage');
+
+Route::group(['prefix' => 'shop'], function () {
+    Route::get('/',  ShopController::class)->name('shop');
+    Route::get('/history',  HistoryController::class)->name('history');
+    Route::post('/data',  DataController::class)->name('data');
+    Route::get('/create',  CreateController::class)->name('create');
+    Route::post('/create',  [Goods::class, 'store'])->name('store');
+});
+

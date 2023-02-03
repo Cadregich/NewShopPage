@@ -12,6 +12,7 @@
     <title>@yield('title')</title>
 </head>
 <body style="background: url({{ URL::asset('img/backgrounds/bg.png') }}) no-repeat;">
+@include('items/navbar')
 @yield('body')
 </body>
 @yield('scripts')

@@ -23,11 +23,17 @@ class ShopService
         $goodsHasQueries = $this->validateQueries($searchQuery, $modQuery);
 
         if (!$goodsHasQueries) {
+//            $goods = Goods::join('mods', 'goods.mod_id', '=', 'mods.id')
+//                ->orderBy('mods.title', 'asc')->toSql();
             $goods = Goods::join('mods', 'goods.mod_id', '=', 'mods.id')
+                ->select('goods.id', 'goods.name', 'goods.mod_id', 'goods.price')
                 ->orderBy('mods.title', 'asc')->paginate(15)->withQueryString();
         } else {
-            $goods = $goodsHasQueries->join('mods', 'goods.mod_id', '=', 'mods.id')
-                ->orderBy('mods.title', 'asc')->paginate(15)->withQueryString();
+            $goods = $goodsHasQueries->join('mods','goods.mod_id', '=', 'mods.id')
+                ->orderBy('mods.title', 'asc')
+                ->select('goods.id', 'goods.name', 'goods.mod_id', 'goods.price')
+                ->toSql();
+            dd($goods);
         }
         return $goods;
     }

@@ -1,13 +1,13 @@
 @extends('layouts/document')
 @section('title')
     Добавление товара
-@endsectionё
+@endsection
 @section('links')
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 @endsection
 @section('body')
-
-    <form method="post" action="{{ route('store') }}" class="text-center w-25 m-auto" enctype="multipart/form-data">
+<div class="container">
+    <form method="post" action="{{ route('store') }}" class="text-center m-auto" id="create-form" enctype="multipart/form-data">
         @csrf
         <div class="h1 mt-3 mb-5">Добавить предмет</div>
         <div class="mb-3 ">
@@ -45,6 +45,8 @@
             </div>
         @endif
     </form>
+</div>
+
 
 @endsection
 @section('scripts')

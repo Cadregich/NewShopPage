@@ -17,8 +17,9 @@
                 </div>
                 {{--Modal body--}}
                 <div class="modal-body">
-                    <form action="{{ route('data') }}" id="buy-form" method="get">
+                    <form action="{{ route('data') }}" id="buy-form" method="post">
                         @csrf
+                        <input type="hidden" name="item-id" id="goodsId">
                         <input type="text" class="buy-item-range" value="1" name="items-count">
                         <input value="1" type="range" class="form-range" min="1" max="100" step="1" id="itemRange">
                     </form>
@@ -50,7 +51,7 @@
                         <button class="butt" id="balance-butt">Пополнить</button>
                     </div>
                     <div class="drop-filters-and-history-low-screen">
-                        <button class="butt reset-butt">Покупки</button>
+                        <a href="{{ route('history') }}" class="butt reset-butt">Покупки</a>
                     </div>
                 </div>
             </div>
@@ -81,7 +82,7 @@
                             </ul>
                         </div>
                         <div class="drop-filters-and-history">
-                            <button class="butt reset-butt" id="reset-butt-normal-ss">Покупки</button>
+                            <a href="{{ route('history') }}" class="butt reset-butt" id="reset-butt-normal-ss">Покупки</a>
                         </div>
                     </form>
                 </div>
@@ -112,8 +113,8 @@
                     </div>
                     <div class="card-button-area">
                         <button class="butt card-btn" item-name="{{ $goodsUnit->name }}"
-                                item-cost="{{ $goodsUnit->price }}" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                                item-id="{{ $goodsUnit->id }}" item-cost="{{ $goodsUnit->price }}"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal">
                             {{ $goodsUnit->price }}
                             <i class="fa-solid fa-coins" id="card-coins"></i>
                         </button>

@@ -24,6 +24,7 @@ class DataRequest extends FormRequest
     public function rules()
     {
         return [
+            'item-id' => '',
             'items-count' => ''
         ];
     }

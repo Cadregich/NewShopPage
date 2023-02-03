@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Shop;
 
 use App\Http\Requests\GoodsSearchRequest;
 use App\Models\Mods;
@@ -13,6 +13,6 @@ class ShopController
         $goods = new ShopService;
         $goods = $goods->Shop($request);
         $mods = Mods::orderBy('title', 'asc')->pluck('title');
-        return view('shop', compact('goods', 'mods'));
+        return view('Shop/Shop', compact('goods', 'mods'));
     }
 }
