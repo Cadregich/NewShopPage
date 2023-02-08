@@ -254,6 +254,7 @@
 .reset-butt, .purchases-butt {
     font-size: 16px;
     padding: 5px 10px 5px 10px;
+    text-decoration: none;
 }
 #reset-butt-normal-ss {
     margin-left: 10px;

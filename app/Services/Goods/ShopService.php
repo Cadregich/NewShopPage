@@ -7,27 +7,22 @@ use App\Models\Mods;
 
 class ShopService
 {
-    public function Shop($request)
+    public function buildGoodsQuery($request)
     {
-        if ($request->has('search')) {
-            $searchQuery = mb_strtolower($request->validated()['search']);
-        } else {
-            $searchQuery = false;
-        }
-        if ($request->has('mod')) {
-            $modQuery = $request->validated()['mod'];
-        } else {
-            $modQuery = false;
-        }
+        $searchQuery = $request->has('search') ? $request->validated()['search'] : false;
+        $modQuery = $request->has('mod') ? $request->validated()['mod'] : false;
 
         $goodsHasQueries = $this->validateQueries($searchQuery, $modQuery);
 
         if (!$goodsHasQueries) {
             $goods = Goods::join('mods', 'goods.mod_id', '=', 'mods.id')
+                ->select('goods.id', 'goods.name', 'goods.mod_id', 'goods.img', 'goods.price')
                 ->orderBy('mods.title', 'asc')->paginate(15)->withQueryString();
         } else {
-            $goods = $goodsHasQueries->join('mods', 'goods.mod_id', '=', 'mods.id')
-                ->orderBy('mods.title', 'asc')->paginate(15)->withQueryString();
+            $goods = $goodsHasQueries->join('mods','goods.mod_id', '=', 'mods.id')
+                ->orderBy('mods.title', 'asc')
+                ->select('goods.id', 'goods.name', 'goods.mod_id', 'goods.img', 'goods.price')
+                ->paginate(15)->withQueryString();
         }
         return $goods;
     }
@@ -49,7 +44,8 @@ class ShopService
     private function validateQueries($searchQuery, $modQuery)
     {
         $goodsSearch = $this->searchHandler($searchQuery);
-        $modId = Mods::where('title', $modQuery)->get()[0]->id;
+        $modId = $modQuery ? Mods::where('title', $modQuery)->first()->id : false;
+
         if ($searchQuery && $modQuery) {
             $goods = $goodsSearch->where('mod_id', $modId);
         } elseif ($searchQuery && !$modQuery) {
@@ -59,6 +55,7 @@ class ShopService
         } else {
             return false;
         }
+
         if ($modQuery) {
             $goods->orderBy('name');
         }
