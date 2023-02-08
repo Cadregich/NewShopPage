@@ -11,7 +11,7 @@ class ShopController
     public function __invoke(GoodsSearchRequest $request)
     {
         $goods = new ShopService;
-        $goods = $goods->Shop($request);
+        $goods = $goods->buildGoodsQuery($request);
         $mods = Mods::orderBy('title', 'asc')->pluck('title');
         return view('Shop/Shop', compact('goods', 'mods'));
     }
