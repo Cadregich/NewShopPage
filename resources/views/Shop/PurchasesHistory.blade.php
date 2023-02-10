@@ -8,7 +8,7 @@
 @section('body')
     <div class="main-container">
         <div class="history-container">
-            <h3 class="mt-2 mt-sm-0 ml-sm-0 table-header">Блоки и предметы</h3>
+            <h3 class="mt-2 mt-sm-0 ml-sm-0 table-header history-header">Блоки и предметы</h3>
             <div class="blocks-table mt-2 mt-mg-3">
                 <table class="table text-white">
                     <thead>
@@ -16,16 +16,20 @@
                         <th scope="col">#</th>
                         <th scope="col">Предмет</th>
                         <th scope="col">Время</th>
-                        <th scope="col">Баланс</th>
+                        <th scope="col">Цена</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Драконий посох силы (1)</td>
-                        <td>10/11/23 | 22:03:10</td>
-                        <td>4960000 (-40000)</td>
-                    </tr>
+                    @if($purchasesExist)
+                    @foreach($purchases as $purchase)
+                        <tr>
+                            <th scope="row">{{ $loop->iteration }}</th>
+                            <td>{{ $purchase->goods_name }} ({{ $purchase->goods_count }})</td>
+                            <td>{{ $purchase->created_at }}</td>
+                            <td>{{ $purchase->purchase_price }}</td>
+                        </tr>
+                    @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
