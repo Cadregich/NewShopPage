@@ -6,6 +6,26 @@
     Магазин предметов
 @endsection
 @section('body')
+
+    @if (session('status'))
+        <div class="modal status-modal fade" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ session('status') }}</h5>
+                        <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"><i
+                                class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Благодарим вас за покупку.</p>
+                        Вы внесли свой вклад в развития нашего проекта.
+                        <p>Ваши пожертвования помогают нам разваваться и существовать.</p>
+                        <p>С свою очередь, мы продолжим развать наш проект и делать вас счастливее!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     {{--Modal--}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-up-centered">
@@ -132,5 +152,15 @@
 @section('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
+    @if (session('status'))
+    <script>
+        $(document).ready(function() {
+            $('.status-modal').modal('show');
+            setTimeout(function() {
+                $('.status-modal').modal('hide');
+            }, 5000);
+        });
+    </script>
+    @endif
     <script src="{{ asset('js/shop.js') }}"></script>
 @endsection

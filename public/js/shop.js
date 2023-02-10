@@ -13,7 +13,6 @@ $(document).ready(function () {
             $('#search-end-filter').css('justify-content', 'start');
         }
     }
-
     adaptiveBalanceBoard();
     $(window).resize(adaptiveBalanceBoard, function () {
         adaptiveBalanceBoard();
