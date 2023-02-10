@@ -12,11 +12,11 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ session('status') }}</h5>
+                        <h4 class="modal-title">{{ session('status') }}</h4>
                         <button type="button" class="modal-close" data-bs-dismiss="modal" aria-label="Close"><i
                                 class="fa-solid fa-xmark"></i></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body thanks-modal-body">
                         <p>Благодарим вас за покупку.</p>
                         Вы внесли свой вклад в развития нашего проекта.
                         <p>Ваши пожертвования помогают нам разваваться и существовать.</p>
@@ -158,7 +158,7 @@
             $('.status-modal').modal('show');
             setTimeout(function() {
                 $('.status-modal').modal('hide');
-            }, 5000);
+            }, 10000);
         });
     </script>
     @endif
