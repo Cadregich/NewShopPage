@@ -158,7 +158,7 @@
             $('.status-modal').modal('show');
             setTimeout(function() {
                 $('.status-modal').modal('hide');
-            }, 5000);
+            }, 10000);
         });
     </script>
     @endif

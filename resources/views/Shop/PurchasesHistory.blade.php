@@ -16,7 +16,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Предмет</th>
                         <th scope="col">Время</th>
-                        <th scope="col">Цена</th>
+                        <th scope="col">Стоимость</th>
                     </tr>
                     </thead>
                     <tbody>
