@@ -10,10 +10,6 @@ class HistoryController extends Controller
 {
     public function __invoke()
     {
-        $purchases = Purchases::select('goods_name', 'goods_count', 'purchase_price', 'created_at')->get();
-        return view('shop/PurchasesHistory', [
-            'purchases' => $purchases,
-            'purchasesExist' => $purchases->count() > 0
-        ]);
+        return view('shop/PurchasesHistory');
     }
 }

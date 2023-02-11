@@ -19,31 +19,22 @@
                         <th scope="col">Стоимость</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @if($purchasesExist)
-                    @foreach($purchases as $purchase)
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $purchase->goods_name }} ({{ $purchase->goods_count }})</td>
-                            <td>{{ $purchase->created_at }}</td>
-                            <td>{{ $purchase->purchase_price }}</td>
-                        </tr>
-                    @endforeach
-                    @endif
+                    <tbody id="purchases-table-body">
+
                     </tbody>
                 </table>
+
+                    <button class="btn btn-primary" id="load-more-button"
+                            purchaseLimit="">
+                        Загрузить ещё
+                    </button>
+
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
-    <script>
-
-        $(window).resize(function () {
-            console.log("Current window width: " + $(window).width());
-        });
-    </script>
 @endsection
 @section('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
+    <script src="{{ asset('js/purchases.js') }}"></script>
 @endsection
