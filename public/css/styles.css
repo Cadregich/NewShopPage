@@ -64,3 +64,9 @@
         font-size: 12px;
     }
 }
+#purchases-table-body>tr>th {
+    font-weight: 500;
+}
+#load-more-button {
+    display: none;
+}

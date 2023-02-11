@@ -1,11 +1,10 @@
 $(document).ready(function () {
     let loadMoreButton = $('#load-more-button');
 
-    let offset = 30;
+    let offset = 0;
     let limit = 30;
 
-
-    loadMoreButton.click(function () {
+    function getItems() {
         $.ajax({
             url: '/shop/get-more-items',
             method: 'GET',
@@ -15,7 +14,6 @@ $(document).ready(function () {
             },
             success: function (data) {
 
-                let purchasesCount = loadMoreButton.attr('purchasesCount');
 
                 let tbody = $('#purchases-table-body');
                 data['purchases'].forEach(function (purchase, index) {
@@ -29,13 +27,20 @@ $(document).ready(function () {
                     );
                     tbody.append(tr);
                 });
-
+                let purchasesCount = data['purchasesCount'];
                 offset += limit;
-
-                if (offset >= purchasesCount) {
-                    $('#load-more-button').hide();
+                console.log(purchasesCount);
+                if (offset < purchasesCount) {
+                    loadMoreButton.show();
+                } else {
+                    loadMoreButton.hide();
                 }
             }
         });
+    }
+    getItems();
+
+    loadMoreButton.click(function () {
+        getItems();
     });
 });
