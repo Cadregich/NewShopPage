@@ -19,31 +19,32 @@
                         <th scope="col">Стоимость</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="purchases-table-body">
                     @if($purchasesExist)
-                    @foreach($purchases as $purchase)
-                        <tr>
-                            <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $purchase->goods_name }} ({{ $purchase->goods_count }})</td>
-                            <td>{{ $purchase->created_at }}</td>
-                            <td>{{ $purchase->purchase_price }}</td>
-                        </tr>
-                    @endforeach
+                        @foreach($purchases as $purchase)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $purchase->goods_name }} ({{ $purchase->goods_count }})</td>
+                                <td>{{ strftime("%Y.%m.%d, %H:%M:%S", strtotime($purchase->created_at)) }}</td>
+                                <td>{{ $purchase->purchase_price }}</td>
+                            </tr>
+                        @endforeach
                     @endif
                     </tbody>
                 </table>
+                @if($purchasesCount > 30)
+                    <button class="btn btn-primary" id="load-more-button"
+                            purchasesCount="{{ $purchasesCount }}"
+                            purchaseLimit="">
+                        Загрузить ещё
+                    </button>
+                @endif
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
-    <script>
-
-        $(window).resize(function () {
-            console.log("Current window width: " + $(window).width());
-        });
-    </script>
 @endsection
 @section('scripts')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.3.min.js') }}"></script>
+    <script src="{{ asset('js/purchases.js') }}"></script>
 @endsection
