@@ -77,27 +77,38 @@ body {
     color: white;
     border: black;
 }
-.pagination> .page-link.disabled, .disabled > .page-link {
+
+.pagination > .page-link.disabled, .disabled > .page-link {
     background-color: #410370 !important;
     color: white;
 }
-.pagination> .page-link.active, .active > .page-link {
+
+.pagination > .page-link.active, .active > .page-link {
     background-color: #5618db;
 }
-.page-link:hover {
-    background-color: #c57aff;
-    color: white;
 
+.page-link:hover {
+    background-color: #c57aff !important;
+    color: white;
 }
+
 .page-link:active {
-    background-color: #35015b;
-    box-shadow: none !important;
+    background-color: #35015b !important;
+    color: white;
 }
+
+.page-link:focus {
+    color: white;
+    box-shadow: none;
+    background: #4b0082;
+}
+
 @media (max-width: 500px) {
     .page-link {
         font-size: 10px;
     }
 }
+
 .thanks-modal-body {
     font-size: 16px !important;
 }
