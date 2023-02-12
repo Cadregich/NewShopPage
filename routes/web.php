@@ -30,7 +30,7 @@ Route::group(['prefix' => 'shop'], function () {
     Route::get('/',  ShopController::class)->name('shop');
     Route::get('/history',  PurchasesController::class)->name('history');
     Route::get('/get-more-items',  GetMoreItemsController::class)->name('get-more-items');
-    Route::post('/data',  GoodsBuyController::class)->name('data');
+    Route::post('/data',  GoodsBuyController::class)->name('buy');
     Route::get('/create',  CreateController::class)->name('create');
     Route::post('/create',  [Goods::class, 'store'])->name('store');
 });

@@ -13,6 +13,7 @@ $(document).ready(function () {
             $('#search-and-filter').css('justify-content', 'start');
         }
     }
+
     adaptiveBalanceBoard();
     $(window).resize(adaptiveBalanceBoard, function () {
         adaptiveBalanceBoard();
@@ -27,19 +28,23 @@ $(document).ready(function () {
         let itemName = $(this).attr('item-name');
         let itemId = Number($(this).attr('item-id'));
 
+        function writeItemsCount(cost, count) {
+            $(".modal-cost").html(`<i class="cost">${cost}</i>` + ' <i class="fa-solid fa-coins modal-coins"></i>' + ' за ' + count + ' шт.');
+        }
+
         $('#goodsId').val(itemId);
 
         rangeText.val(1);
         range.val(1);
 
-        $('#modalItemTitle').html('Покупка: «' + itemName + '»');
+        writeItemsCount(itemCost, rangeText.val());
 
-        $(".modal-cost").html(`<i class="cost">${itemCost}</i>` + ' <i class="fa-solid fa-coins modal-coins"></i>' + ' за ' + 1 + ' шт.');
+        $('#modalItemTitle').html('Покупка: «' + itemName + '»');
 
         range.on("change", function () {
             let itemsCost = this.value * itemCost;
             rangeText.val(this.value);
-            $(".modal-cost").html(`<i class="cost">${itemsCost}</i>` + ' <i class="fa-solid fa-coins modal-coins"></i>' + ' за ' + this.value + ' шт.');
+            writeItemsCount(itemsCost, rangeText.val());
         });
 
         rangeText.on("input change", function () {
@@ -49,24 +54,17 @@ $(document).ready(function () {
                 rangeText.val(999);
             }
             if (rangeText.val() < 1) {
-                rangeText.val(1);
+                rangeText.val('');
             }
             if (isNaN(rangeText.val())) {
-                rangeText.val(1);
+                rangeText.val('');
+            }
+            if (rangeText.val() === '') {
+                rangeText.val(0)
             }
 
             let itemsCost = this.value * itemCost;
-
-            if (rangeText.val() === '') {
-                range.val(1);
-                $(".modal-cost").html(`<i class="cost">${itemCost}</i>`
-                    + ' <i class="fa-solid fa-coins modal-coins"></i>'
-                    + ' за ' + 1 + ' шт.');
-            } else {
-                $(".modal-cost").html(`<i class="cost">${itemsCost}</i>`
-                    + ' <i class="fa-solid fa-coins modal-coins"></i>'
-                    + ' за ' + this.value + ' шт.');
-            }
+            writeItemsCount(itemsCost, rangeText.val());
 
             range.val(this.value);
         });

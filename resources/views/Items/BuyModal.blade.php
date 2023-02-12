@@ -11,7 +11,7 @@
             {{-- /.Modal header --}}
             {{-- Modal body --}}
             <div class="modal-body">
-                <form action="{{ route('data') }}" method="post" id="buy-form">
+                <form action="{{ route('buy') }}" method="post" id="buy-form">
                     @csrf
                     <input id="goodsId" type="hidden" name="item-id">
                     <input id="buy-item-range" type="text" value="1" name="items-count">

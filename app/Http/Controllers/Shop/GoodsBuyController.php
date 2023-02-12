@@ -13,6 +13,9 @@ class GoodsBuyController extends Controller
     {
         $buyGoods = new BuyGoods;
         $buyCondition = $buyGoods->BuyGoods($request);
+        if ($buyCondition === 'error') {
+            return redirect()->route('shop')->with('status', 'error');
+        }
         return redirect()->route('shop')->with('status', $buyCondition);
     }
 }
