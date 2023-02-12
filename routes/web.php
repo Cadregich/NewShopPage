@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Shop\CreateController;
 use App\Http\Controllers\Shop\GetMoreItemsController;
 use App\Http\Controllers\Shop\GoodsBuyController;
-use App\Http\Controllers\Shop\HistoryController;
+use App\Http\Controllers\Shop\PurchasesController;
 use App\Http\Controllers\Shop\ShopController;
 use App\Models\Goods;
 use Illuminate\Http\Client\Request;
@@ -28,7 +28,7 @@ Route::get('/',  MainPageController::class)->name('mainpage');
 
 Route::group(['prefix' => 'shop'], function () {
     Route::get('/',  ShopController::class)->name('shop');
-    Route::get('/history',  HistoryController::class)->name('history');
+    Route::get('/history',  PurchasesController::class)->name('history');
     Route::get('/get-more-items',  GetMoreItemsController::class)->name('get-more-items');
     Route::post('/data',  GoodsBuyController::class)->name('data');
     Route::get('/create',  CreateController::class)->name('create');

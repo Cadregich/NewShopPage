@@ -13,8 +13,6 @@ $(document).ready(function () {
                 limit: limit
             },
             success: function (data) {
-
-
                 let tbody = $('#purchases-table-body');
                 data['purchases'].forEach(function (purchase, index) {
                     let tr = $('<tr>');
@@ -29,7 +27,8 @@ $(document).ready(function () {
                 });
                 let purchasesCount = data['purchasesCount'];
                 offset += limit;
-                console.log(purchasesCount);
+
+                // console.log(limit, offset);
                 if (offset < purchasesCount) {
                     loadMoreButton.show();
                 } else {
